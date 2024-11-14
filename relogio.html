@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Digital</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #clock {
+      font: bold 32pt "Courier New", Courier, monospace;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 40px;
+      border: solid #1dbf73 3px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+      color: #1dbf73;
+      text-shadow: 0px 0px 10px #1dbf73;
+      animation: glow 1s ease-in-out infinite alternate;
+      text-align: center;
+    }
+
+    #date-container {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    #date {
+      font: 16pt "Courier New", Courier, monospace;
+      color: #ffffff;
+      animation: scroll 10s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px #1dbf73, 0 0 10px #1dbf73, 0 0 15px #1dbf73;
+      }
+      to {
+        box-shadow: 0 0 20px #1dbf73, 0 0 30px #1dbf73, 0 0 40px #1dbf73;
+      }
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+  <script>
+    function displayTime() {
+      const elt = document.getElementById("clock");
+      const now = new Date();
+      const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      elt.textContent = now.toLocaleTimeString('pt-BR', options);
+      setTimeout(displayTime, 1000);
+    }
+
+    function displayDate() {
+      const dateElt = document.getElementById("date");
+      const now = new Date();
+      const options = { day: '2-digit', month: 'long', year: 'numeric' };
+      dateElt.textContent = now.toLocaleDateString('pt-BR', options);
+    }
+
+    window.onload = function() {
+      displayTime();
+      displayDate();
+    }
+  </script>
+</head>
+<body>
+  <h1>Relógio Digital</h1>
+  <div id="clock"></div>
+  <div id="date-container">
+    <div id="date"></div>
+  </div>
+</body>
+</html>
